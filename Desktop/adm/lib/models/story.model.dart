@@ -18,6 +18,7 @@ class Story {
   @JsonKey(defaultValue: false, disallowNullValue: false)
   bool active = false;
   List<int>? products_ids;
+  bool? isExpanded = false;
   Story({
     this.id,
     required this.name,
@@ -26,7 +27,8 @@ class Story {
     required this.pix,
     this.paymentType,
     this.box,
-    this.products_ids  
+    this.products_ids,
+     this.isExpanded =false  
   });
 
   factory Story.fromJson(Map<String, dynamic> json) => _$StoryFromJson(json);

@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'modules/categories/categories_provider.dart';
 import 'modules/categories/pages/category_main.dart';
 import 'modules/products/productsPage.dart';
+import 'modules/receipts/page/receiptListPage.dart';
+import 'modules/users/page/usersPage.dart';
 
 
 void main() {
@@ -31,6 +33,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routes: {
+        '/ListReceiptsPage':(context) => ListReceiptsPage()
+      },
       home: const MyHomePage(title: 'easy_sidemenu Demo'),
       debugShowCheckedModeBanner: false,
     );
@@ -147,69 +152,50 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Expanded(
                     flex: 5,
-                    child: PageView(
-                      physics: const NeverScrollableScrollPhysics(),
-                      controller: page,
-                      children: [
-                        Scaffold(
-                          appBar: AppBar(
+                    child: Scaffold(
+                        appBar: AppBar(
                             backgroundColor: Colors.white,
                             leading: Icon(Icons.menu,color: Colors.grey,),
                             actions: [],
                           ),
-                          body: Container(
+                      body: PageView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: page,
+                        children: [
+                          Container(),
+                          Container(
+                            color: Colors.white,
+                            child: const Center(
+                              child: UsersRegister()
+                            ),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            child: Center(child: CategoryProvider()),
+                          ),
+                          Container(
+                            color: Colors.white,
+                            child: const Center(child: StorieRegister()),
+                          ),
+                          const ProductsPage(),
+                          //ReceiptComponent(),
+                          Container(
                             color: Colors.white,
                             child: const Center(
                               child: Text(
-                                'Dashboard',
+                                'Only Icon',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
                           ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: const Center(
-                            child: Text(
-                              'Users',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: Center(child: CategoryProvider()),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: const Center(child: StorieRegister()),
-                        ),
-                        ProductsPage(),
-                        Container(
-                          color: Colors.white,
-                          child: const Center(
-                            child: Text(
-                              'Only Title',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          color: Colors.white,
-                          child: const Center(
-                            child: Text(
-                              'Only Icon',
-                              style: TextStyle(fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
               );
             }
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           }),

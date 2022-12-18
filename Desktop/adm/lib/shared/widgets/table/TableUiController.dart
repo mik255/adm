@@ -9,16 +9,17 @@ class TableData {
 }
 
 class TableHeader extends TableData {
-  TableHeader({required this.value});
-
+  TableHeader({required this.value,this.flex =1});
+  int flex;
   Widget value;
 }
 
 class TableCellRow extends TableData {
   TableCellRow({
-    required this.value,
+    required this.value,this.expanded = true,this.flex =1
   });
-
+  int flex;
+  bool expanded;
   Widget value;
 }
 

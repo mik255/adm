@@ -16,7 +16,7 @@ class HttpInterceptor extends Interceptor {
       Response response,
       ResponseInterceptorHandler handler,
       ) {
-    print('<-- ${response.statusCode} ${response.data}');
+    //print('<-- ${response.statusCode} ${response.data}');
     handler.next(response);
   }
 

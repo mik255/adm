@@ -2,15 +2,16 @@ import 'dart:convert';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class User {
-  int id;
+  int? id;
   String nome;
   String cnpj;
   String password;
   int isAtivo;
   DateTime dtCriacao;
   DateTime dtAutalizacao;
+  bool active = false;
   User({
-    required this.id,
+    this.id,
     required this.nome,
     required this.cnpj,
     required this.password,
@@ -38,8 +39,8 @@ class User {
       cnpj: map['cnpj'] as String,
       password: map['password'] as String,
       isAtivo: map['isAtivo'] as int,
-      dtCriacao: DateTime.fromMillisecondsSinceEpoch(map['dtCriacao']),
-      dtAutalizacao: DateTime.fromMillisecondsSinceEpoch(map['dtAutalizacao']),
+      dtCriacao: DateTime.fromMillisecondsSinceEpoch(map['dtCriacao']??0),
+      dtAutalizacao: DateTime.fromMillisecondsSinceEpoch(map['dtAutalizacao']??0),
     );
   }
 

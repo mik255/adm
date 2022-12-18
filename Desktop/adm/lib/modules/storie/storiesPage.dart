@@ -33,16 +33,16 @@ class StorieRegister extends StatelessWidget {
       TableHeader(value: const Text("pix")),
       TableHeader(value: const Text("total")),
       TableHeader(value: const Text("N° Produtos")),
-      TableHeader(
-          value: Row(
-        children: const [
-          Spacer(),
-          Padding(
-            padding: EdgeInsets.only(right: 48.0),
-            child: Text("Ações",style: TextStyle(color: Colors.white)),
-          ),
-        ],
-      )),
+  TableHeader(
+                    value: Row(
+                  children: const [
+                    Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(right: 48.0),
+                      child: Text("Ações",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold)),
+                    ),
+                  ],
+                )),
     ], tableDataList: [
       ...Constants.instance.stories.map((e) => [
         TableCellRow(value: Text(e.name)),
@@ -102,30 +102,7 @@ class StorieRegister extends StatelessWidget {
               ),
             ),
           ),
-          InkWell(
-            mouseCursor: SystemMouseCursors.click,
-            onTap: () {
-              Future<void> _selectDate(BuildContext context) async {
-                final DateTime? picked = await showDatePicker(
-                  context: context,
-                  initialDatePickerMode: DatePickerMode.day,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(1998),
-                  lastDate: DateTime.now(),
-                );
-              }
-
-              _selectDate(context);
-            },
-            child: const Padding(
-              padding: EdgeInsets.all(2),
-              child: Icon(
-                Icons.calendar_month,
-                color: Colors.red,
-              ),
-            ),
-          )
-        ]),
+         ]),
       ]
     )]));
  
@@ -136,10 +113,11 @@ class StorieRegister extends StatelessWidget {
      return Scaffold(
        body: SingleChildScrollView(
          child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                TableUi(
+                 title: 'Lojas',
                isSelected: false,
                extraLines: 0,
                tableUiController: tableUiControllerRequiriments,

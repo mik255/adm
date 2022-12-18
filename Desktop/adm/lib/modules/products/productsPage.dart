@@ -1,4 +1,5 @@
 import 'package:adm/modules/products/store/store.dart';
+import 'package:adm/shared/extensions/currence.dart';
 import 'package:adm/shared/widgets/circurarLoading.dart';
 import 'package:adm/shared/widgets/customTextField.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,11 +30,13 @@ class ProductsPage extends StatelessWidget {
         builder: (context, state,child) {
           TableUiController tableUiControllerRequiriments =
       TableUiController(TableUiState(headers: [
-      TableHeader(value: const Text("Nome")),
-      TableHeader(value: const Text("Estoque")),
-      TableHeader(value: const Text("Preço g20")),
-      TableHeader(value: const Text("Preço praça")),
+         TableHeader(flex:1,value: const Text("Img")),
+      TableHeader(flex:3,value: const Text("Nome")),
+      TableHeader(flex:3,value: const Text("Estoque")),
+      TableHeader(flex:3,value: const Text("Preço g20")),
+      TableHeader(flex:3,value: const Text("Preço praça")),
       TableHeader(
+        flex: 3,
           value: Row(
         children: const [
           Spacer(),
@@ -45,11 +48,17 @@ class ProductsPage extends StatelessWidget {
       )),
     ], tableDataList: [
       ...Constants.instance.products.map((e) =>
-      [
+      [TableCellRow(
+        expanded:false,
+        value: Container(
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
+        height: 50,width: 50,
+        child: Image.network(e.urlImg,fit: BoxFit.cover,))),
         TableCellRow(value: Text(e.name)),
         TableCellRow(value: Text(e.stock.toString())),
-        TableCellRow(value: Text(e.price.toString())),
-        TableCellRow(value: Text(e.squerePrice.toString())),
+        TableCellRow(value: Text(e.price.toCurrence())),
+        TableCellRow(value: Text(e.squerePrice.toCurrence())),
         TableActions(actions: [
           InkWell(
             mouseCursor: SystemMouseCursors.click,
@@ -109,6 +118,7 @@ class ProductsPage extends StatelessWidget {
               child: Column(
                 children: [
                       TableUi(
+                         title: 'Produtos',
                       isSelected: false,
                       extraLines: 0,
                       tableUiController: tableUiControllerRequiriments,

@@ -142,65 +142,45 @@ class CategoryMain extends StatelessWidget {
                             ),
                           ),
                         ),
-                        InkWell(
-                          mouseCursor: SystemMouseCursors.click,
-                          onTap: () {
-                            Future<void> _selectDate(
-                                BuildContext context) async {
-                              final DateTime? picked = await showDatePicker(
-                                context: context,
-                                initialDatePickerMode: DatePickerMode.day,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime(1998),
-                                lastDate: DateTime.now(),
-                              );
-                            }
-
-                            _selectDate(context);
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(2),
-                            child: Icon(
-                              Icons.calendar_month,
-                              color: Colors.red,
-                            ),
-                          ),
-                        )
-                      ]),
+                         ]),
                     ])
               ]));
 
-              return SingleChildScrollView(
-                child: Column(
-                  
-                  children: [
-                    TableUi(
-                        isSelected: false,
-                        extraLines: 0,
-                        tableUiController: tableUiControllerRequiriments,
-                        addCallBack: () {
-                          DialogUtil().showDialogUtil(
-                            title:'Formulario Categoria',
-                            context, CadasterDialog(
-                            categoriesStore: categoriesStore,
-                            onChange: (value) {
-                              category = value;
-                                 
-                            },
-                          ), onSave: () async {
-                            if (category == null) {
+              return Container(
+                width: MediaQuery.of(context).size.width,
+                child: SingleChildScrollView(
+                  child: Column(
+                    
+                    children: [
+                      TableUi(
+                        title: 'Categorias',
+                          isSelected: false,
+                          extraLines: 0,
+                          tableUiController: tableUiControllerRequiriments,
+                          addCallBack: () {
+                            DialogUtil().showDialogUtil(
+                              title:'Formulario Categoria',
+                              context, CadasterDialog(
+                              categoriesStore: categoriesStore,
+                              onChange: (value) {
+                                category = value;
+                                   
+                              },
+                            ), onSave: () async {
+                              if (category == null) {
+                                return false;
+                              }
+                              category!.stories_ids = Constants.instance.stories.where((e) => e.active).map((e) =>e.id!).toList();
+                              CategoriesStates result =
+                                  await categoriesStore.setCategory(category!);
+                              if (result is CategoryState) {
+                                return true;
+                              }
                               return false;
-                            }
-                            category!.stories_ids = Constants.instance.stories.where((e) => e.active).map((e) =>e.id!).toList();
-                            CategoriesStates result =
-                                await categoriesStore.setCategory(category!);
-                            if (result is CategoryState) {
-                              return true;
-                            }
-                            return false;
-                          });
-                        })
-                  ],
+                            });
+                          })
+                    ],
+                  ),
                 ),
               );
             }

@@ -18,7 +18,9 @@ class HttpRoutes{
   String get historyReceipts => '$baseUrl/historyReceipt';
   String get orders => '$baseUrl/orders';
   String get results => '$baseUrl/resultados';
-  String get receipt => '$baseUrl/receipt';
+  String get receipt => '$baseUrl/receipts';
+  String get receiptUserById => '$baseUrl/receipts/user';
   String get stories => '$baseUrl/stories';
   String get products => '$baseUrl/products';
+   String get users => '$baseUrl/users';
 }
