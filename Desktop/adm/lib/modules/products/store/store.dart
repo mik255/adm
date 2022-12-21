@@ -58,7 +58,7 @@ Future<ProductState> updateProduct(Product product) async {
               method: 'PUT',
               body: product.toJson()));
 
-      if (httpApiResponse.statusCode == 200) {
+      if (httpApiResponse.statusCode == 204) {
         await Constants.instance.getProducts();
         customToast("Produto editado com sucesso");
         value = ProductStateSucess();
@@ -82,7 +82,7 @@ Future<ProductState> updateProduct(Product product) async {
       value = ProductStateLoading();
       HttpApiResponse httpApiResponse = await MainStances.httpApiClient.request(
           HttpApiRequest(
-              url: MainStances.httpRoutes.stories,
+              url: MainStances.httpRoutes.products,
               method: 'DELETE',
               body: product.toJson()));
       if (httpApiResponse.statusCode > 200 &&
@@ -102,7 +102,7 @@ Future<ProductState> updateProduct(Product product) async {
       print(_);
       customToast(e.toString());
     }
-    return ProductStateError();
+    return value;
   }
 
   void setImgUrlProductFile(String url){

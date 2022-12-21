@@ -62,7 +62,10 @@ class ProductsPage extends StatelessWidget {
         TableActions(actions: [
           InkWell(
             mouseCursor: SystemMouseCursors.click,
-            onTap: () {},
+            onTap: () {
+               DialogUtil().showDialogUtil(title:'Formulario Loja',context, CreateProductPage(product: e,),
+                   onSave: ((){ ProductController.instance.updateProduct(e); return true;}));
+            },
             child: const Padding(
               padding: EdgeInsets.all(2),
               child: Icon(
@@ -73,7 +76,9 @@ class ProductsPage extends StatelessWidget {
           ),
           InkWell(
             mouseCursor: SystemMouseCursors.click,
-            onTap: () {},
+            onTap: () {
+               ProductController.instance.deleteProduct(e);
+            },
             child: const Padding(
               padding: EdgeInsets.all(2),
               child: Icon(
